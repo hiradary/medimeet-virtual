@@ -1,6 +1,6 @@
 package com.example.medimeet;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,10 +20,11 @@ public class MedimeetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MedimeetApplication.class, args);
 	}
-	@Bean
-    public ApplicationRunner initializeData(DoctorRepository doctorRepository, 
-    		AppointmentRepository appointmentRepository, UserRepository userRepository,FeedbackRepository feedbackRepository, 
-    		PrescriptionRepository prescriptionRepository ) {
+
+    @Bean
+    ApplicationRunner init(DoctorRepository doctorRepository,
+                                  AppointmentRepository appointmentRepository, UserRepository userRepository, FeedbackRepository feedbackRepository,
+                                  PrescriptionRepository prescriptionRepository) {
         return args -> {
             
             loadData(doctorRepository, appointmentRepository, userRepository, feedbackRepository, prescriptionRepository);
@@ -47,10 +48,9 @@ public class MedimeetApplication {
         doctors.add( new Doctor(user.getUserId(), "Hematology", "Friday 11AM-2PM", "Hematologist specializing in blood disorders.", "doctor5.jpg"));
         doctorRepository.saveAll(doctors);
 
-       
         
-    }
  }
+}
 	
 	
 	
