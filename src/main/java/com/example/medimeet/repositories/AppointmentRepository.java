@@ -1,4 +1,4 @@
-package com.example.medimeet.model;
+package com.example.medimeet.repositories;
 
 public interface AppointmentRepository {
 
