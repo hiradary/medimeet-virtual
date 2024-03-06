@@ -1,5 +1,9 @@
 package com.example.medimeet.repositories;
 
-public interface UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.medimeet.model.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }
