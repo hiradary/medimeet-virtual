@@ -15,17 +15,29 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/doctors")
 public class DoctorController {
 
     @Autowired
     private DoctorRepository doctorRepository;
 
-    
     @GetMapping
-    public ResponseEntity<List<Doctor>> getAllDoctors() {
+    public ResponseEntity<List<Doctor>> getAllDoctors(
+            @RequestParam(required = false) String specialization,
+            @RequestParam(required = false) LocalTime startTime,
+            @RequestParam(required = false) LocalTime endTime) {
         try {
-            List<Doctor> doctors = doctorRepository.findAll();
+            List<Doctor> doctors;
+            if (specialization != null && startTime != null && endTime != null) {
+                doctors = doctorRepository.findBySpecializationAndAvailabilityBetween(specialization, startTime, endTime);
+            } else if (specialization != null) {
+                doctors = doctorRepository.findBySpecialization(specialization);
+            } else if (startTime != null && endTime != null) {
+                doctors = doctorRepository.findByAvailabilityBetween(startTime, endTime);
+            } else {
+                doctors = doctorRepository.findAll();
+            }
+
             if (doctors.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -35,54 +47,6 @@ public class DoctorController {
         }
     }
 
-   
-    @GetMapping("/specialization/{specialization}")
-    public ResponseEntity<List<Doctor>> getDoctorsBySpecialization(@PathVariable String specialization) {
-        try {
-            List<Doctor> doctors = doctorRepository.findBySpecialization(specialization);
-            if (doctors.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(doctors, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    
-    @GetMapping("/availability")
-    public ResponseEntity<List<Doctor>> getAvailableDoctors(
-            @RequestParam LocalTime startTime,
-            @RequestParam LocalTime endTime) {
-        try {
-            List<Doctor> doctors = doctorRepository.findByAvailabilityBetween(startTime, endTime);
-            if (doctors.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(doctors, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    
-    @GetMapping("/specialization-availability")
-    public ResponseEntity<List<Doctor>> getDoctorsBySpecializationAndAvailability(
-            @RequestParam String specialization,
-            @RequestParam LocalTime startTime,
-            @RequestParam LocalTime endTime) {
-        try {
-            List<Doctor> doctors = doctorRepository.findBySpecializationAndAvailabilityBetween(specialization, startTime, endTime);
-            if (doctors.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(doctors, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    
     @GetMapping("/{name}")
     public ResponseEntity<Doctor> getDoctorByName(@PathVariable String name) {
         try {
@@ -97,7 +61,6 @@ public class DoctorController {
         }
     }
 
-   
     @PostMapping
     public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
         try {
@@ -108,7 +71,6 @@ public class DoctorController {
         }
     }
 
-    
     @GetMapping("/check-availability")
     public ResponseEntity<Boolean> checkDoctorAvailability(@RequestParam LocalDate date) {
         try {
@@ -119,37 +81,33 @@ public class DoctorController {
         }
     }
 
-    @PutMapping("/doctors/{id}")
-    public ResponseEntity<?> updateDoctor(@PathVariable(value = "id") Long id, @RequestBody Doctor doctorDetails) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctorDetails) {
         try {
-            Optional<Doctor> existingDoctorOptional = doctorRepository.findById(id);
-            if (existingDoctorOptional.isPresent()) {
-                Doctor existingDoctor = existingDoctorOptional.get();
+            return doctorRepository.findById(id).map(existingDoctor -> {
                 existingDoctor.setSpecialization(doctorDetails.getSpecialization());
                 existingDoctor.setAvailability(doctorDetails.getAvailability());
                 existingDoctor.setBio(doctorDetails.getBio());
                 existingDoctor.setPhoto(doctorDetails.getPhoto());
-                    
-                return new ResponseEntity<>(doctorRepository.save(existingDoctor), HttpStatus.OK);
-            }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-        } 
-        }catch (Exception e) {
-                return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+                Doctor updatedDoctor = doctorRepository.save(existingDoctor);
+                return new ResponseEntity<>(updatedDoctor, HttpStatus.OK);
+            }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    
-    @DeleteMapping("/doctors")
+
+    @DeleteMapping
     public ResponseEntity<HttpStatus> deleteAllDoctors() {
         try {
             doctorRepository.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-        	return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    @DeleteMapping("/doctors/{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteDoctor(@PathVariable Long id) {
         try {
             doctorRepository.deleteById(id);
@@ -158,9 +116,4 @@ public class DoctorController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    
-    
-    
-
 }
