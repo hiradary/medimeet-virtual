@@ -41,11 +41,11 @@ public class MedimeetApplication {
        
 		 
         ArrayList<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor(user.getUserId(), "Cardiology", "Monday 9AM-12PM", "Experienced cardiologist specializing in heart diseases.", "doctor1.jpg"));  
-        doctors.add( new Doctor(user.getUserId(), "Dermatology", "Tuesday 1PM-4PM", "Dermatologist with a focus on skincare treatments.", "doctor2.jpg"));
-        doctors.add( new Doctor(user.getUserId(), "Endocrinology", "Wednesday 10AM-1PM", "Endocrinologist dedicated to hormone-related disorders.", "doctor3.jpg"));
-        doctors.add( new Doctor(user.getUserId(), "Gastroenterology", "Thursday 2PM-5PM", "Gastroenterologist providing expert care for digestive issues.", "doctor4.jpg"));
-        doctors.add( new Doctor(user.getUserId(), "Hematology", "Friday 11AM-2PM", "Hematologist specializing in blood disorders.", "doctor5.jpg"));
+        doctors.add(new Doctor(user, "Cardiology", "Monday 9AM-12PM", "Experienced cardiologist specializing in heart diseases.", "doctor1.jpg"));  
+        doctors.add( new Doctor(user, "Dermatology", "Tuesday 1PM-4PM", "Dermatologist with a focus on skincare treatments.", "doctor2.jpg"));
+        doctors.add( new Doctor(user, "Endocrinology", "Wednesday 10AM-1PM", "Endocrinologist dedicated to hormone-related disorders.", "doctor3.jpg"));
+        doctors.add( new Doctor(user, "Gastroenterology", "Thursday 2PM-5PM", "Gastroenterologist providing expert care for digestive issues.", "doctor4.jpg"));
+        doctors.add( new Doctor(user, "Hematology", "Friday 11AM-2PM", "Hematologist specializing in blood disorders.", "doctor5.jpg"));
         doctorRepository.saveAll(doctors);
 
         

@@ -18,21 +18,17 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "doctors")
 public class Doctor {
-	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Appointment> appointments;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "doctor_id")
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Appointment> appointments;
 
     @Column(name = "specialization")
     private String specialization;
@@ -46,21 +42,16 @@ public class Doctor {
     @Column(name = "photo")
     private String photo;
 
-   
-    
-
     public Doctor() {
-		
-	}
+    }
 
-	public Doctor(Long userId, String specialization, String availability, String bio, String photo) {
-		
-		this.userId = userId;
-		this.specialization = specialization;
-		this.availability = availability;
-		this.bio = bio;
-		this.photo = photo;
-	}
+    public Doctor(User user, String specialization, String availability, String bio, String photo) {
+        this.user = user;
+        this.specialization = specialization;
+        this.availability = availability;
+        this.bio = bio;
+        this.photo = photo;
+    }
 
 	public Long getId() {
         return id;
@@ -68,14 +59,6 @@ public class Doctor {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getSpecialization() {

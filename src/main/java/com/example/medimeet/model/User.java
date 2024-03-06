@@ -16,29 +16,29 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId")
-	private long userId;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userId")
+    private long userId;
 
-	
+    @Column(name = "name")
+    private String name;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "email", unique = true)
+    private String email;
 
-	@Column(name = "email")
-	private String email;
+    @Column(name = "password")
+    private String password;
 
-	@Column(name = "password")
-	private String password;
+    public User() {
+    }
 
-//	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private Set<Appointment> appointments = new HashSet<>();
-	
-	public User() {
-
-	}
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
 	public String getName() {
 		return name;
@@ -64,19 +64,9 @@ public class User {
 		this.password = password;
 	}
 	
-	
 
 	public long getUserId() {
 		return userId;
 	}
 
-
-
-	public User(String name, String email, String password) {
-	
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	
-	}
 }

@@ -19,7 +19,6 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "appointment_id")
     private Long appointmentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,31 +37,24 @@ public class Appointment {
 
     @Column(name = "status")
     private String status;
-    
-    
-    
-    
 
+    public Appointment() {
+    }
+
+    public Appointment(User patient, Doctor doctor, LocalDate appointmentDate, LocalTime appointmentTime, String status) {
+        this.patient = patient;
+        this.doctor = doctor;
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.status = status;
+    }
+ 
 	public Long getAppointmentId() {
 		return appointmentId;
 	}
 
 	public void setAppointmentId(Long appointmentId) {
 		this.appointmentId = appointmentId;
-	}
-
-	public Appointment(User patient, Doctor doctor, LocalDate appointmentDate, LocalTime appointmentTime,
-			String status) {
-		super();
-		this.patient = patient;
-		this.doctor = doctor;
-		this.appointmentDate = appointmentDate;
-		this.appointmentTime = appointmentTime;
-		this.status = status;
-	}
-
-	public Appointment() {
-		
 	}
 
 	public User getPatient() {
@@ -104,8 +96,6 @@ public class Appointment {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-    
-    
 }
 
     
