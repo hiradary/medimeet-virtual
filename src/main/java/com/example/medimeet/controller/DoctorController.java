@@ -9,7 +9,7 @@ import com.example.medimeet.model.Doctor;
 import com.example.medimeet.repositories.DoctorRepository;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +24,8 @@ public class DoctorController {
     @GetMapping
     public ResponseEntity<List<Doctor>> getAllDoctors(
             @RequestParam(required = false) String specialization,
-            @RequestParam(required = false) LocalTime startTime,
-            @RequestParam(required = false) LocalTime endTime) {
+            @RequestParam(required = false) LocalDateTime startTime,
+            @RequestParam(required = false) LocalDateTime endTime) {
         try {
             List<Doctor> doctors;
             if (specialization != null && startTime != null && endTime != null) {
@@ -71,15 +71,15 @@ public class DoctorController {
         }
     }
 
-    @GetMapping("/check-availability")
-    public ResponseEntity<Boolean> checkDoctorAvailability(@RequestParam LocalDate date) {
-        try {
-            boolean available = doctorRepository.existsByAvailabilityDate(date);
-            return new ResponseEntity<>(available, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/check-availability")
+//    public ResponseEntity<Boolean> checkDoctorAvailability(@RequestParam LocalDate date) {
+//        try {
+//            boolean available = doctorRepository.existsByAvailabilityDate(date);
+//            return new ResponseEntity<>(available, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctorDetails) {

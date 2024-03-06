@@ -1,5 +1,6 @@
 package com.example.medimeet.model;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -33,8 +34,8 @@ public class Doctor {
     @Column(name = "specialization")
     private String specialization;
 
-    @Column(name = "availability")
-    private String availability;
+    @Column(name = "availability", columnDefinition = "TIMESTAMP")
+    private LocalDateTime availability;
 
     @Column(name = "bio")
     private String bio;
@@ -45,7 +46,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(User user, String specialization, String availability, String bio, String photo) {
+    public Doctor(User user, String specialization, LocalDateTime availability, String bio, String photo) {
         this.user = user;
         this.specialization = specialization;
         this.availability = availability;
@@ -69,11 +70,11 @@ public class Doctor {
         this.specialization = specialization;
     }
 
-    public String getAvailability() {
+    public LocalDateTime getAvailability() {
         return availability;
     }
 
-    public void setAvailability(String availability) {
+    public void setAvailability(LocalDateTime availability) {
         this.availability = availability;
     }
 

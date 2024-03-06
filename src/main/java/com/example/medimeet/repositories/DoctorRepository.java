@@ -2,7 +2,7 @@
 package com.example.medimeet.repositories;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,15 +14,15 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
 	List<Doctor> findBySpecialization(String specialization);
 
 
-    List<Doctor> findByAvailabilityBetween(LocalTime startTime, LocalTime endTime);
+    List<Doctor> findByAvailabilityBetween(LocalDateTime startTime, LocalDateTime endTime);
 
 
-    List<Doctor> findBySpecializationAndAvailabilityBetween(String specialization, LocalTime startTime, LocalTime endTime);
+    List<Doctor> findBySpecializationAndAvailabilityBetween(String specialization, LocalDateTime startTime, LocalDateTime endTime);
 
 
     Doctor findByName(String name);
 
 
-    boolean existsByAvailabilityDate(LocalDate date);
+//    boolean existsByAvailabilityDate(LocalDate date);
 
 }
