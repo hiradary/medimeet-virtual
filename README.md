@@ -1,1 +1,0 @@
-# medimeet-virtual
