@@ -3,22 +3,30 @@
     <h1>MediMeet</h1>
     <router-view name="nav"></router-view>
     <!-- <DoctorInterface/> -->
-    <PatientInterface/> 
+    <!-- <PatientInterface/>  -->
+    <!-- <LoginPage/> -->
     <!-- <UserSummary/> -->
+    <UpdateUser/>
+
   </div>
 </template>
 
 <script>
 // import DoctorInterface from './components/DoctorInterface.vue'
-import PatientInterface from './PatientInterface.vue'
+// import LoginPage from './LoginPage.vue';
+// import PatientInterface from './PatientInterface.vue'
 // import UserSummary from '../components/UserSummary.vue';
+import UpdateUser from '../views/UpdateUser.vue'
+
 
 export default {
   name: 'App',
   components: {
     // DoctorInterface,
-    PatientInterface,
+    // PatientInterface,
     // UserSummary
+    // LoginPage
+    UpdateUser
   }
 }
 </script>

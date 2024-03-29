@@ -1,8 +1,6 @@
 <template>
   <NavBar />
   <br>
-  <h2>Patient Interface</h2>
-
     <!-- <input type="submit" value="My Appointment">
     <input type="submit" value="Feedback">
     <input type="submit" value="My prescription">
@@ -10,29 +8,45 @@
     <br>
       <input type="submit" value="Update your profile">            
       <input type="submit" value="Delete your account">
-      <input type="submit" value="Logout">
-    <br>
-    <label for="patientName">Patient Name: </label>
-      <br>
-    <label for="patientEmail">Email: </label>
-     <br>
-    <label for="patientID">Patient ID: </label>
-     <br>
-    <label for="patientAge">Age: </label>
-     <br>
-    <label for="patientGender">Gender: </label>
-      <br>
-    <label for="patientPhone">Phone: </label>
-    <br>
-    <label for="patientBio">Bio: </label>
-    <br>
-    <p>
-    </p> -->
-    <div class="container">
+      <input type="submit" value="Logout"> -->
+ 
+      <div class="container">
       <div class="row">
         <div class="col-md-12">
-          
-        </div>
+          <h1 class="text-center">Patient Info</h1>
+
+          <a class="btn btn-primary btn-block" href="/add-patient">Add Patient</a>
+          <br>
+          <br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">ID</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Bio</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="patient in patients" :key="patient.id">
+                <td>{{ patient.name }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.age }}</td>
+                <td>{{ patient.gender }}</td>
+                <td>
+                  <a class="btn btn-primary" href="/edit/{{ patient.id }}">Edit</a>
+                  <button class="btn btn-danger" @click="deletePatient(patient.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>  
     </div>
   </div>
 </template>
