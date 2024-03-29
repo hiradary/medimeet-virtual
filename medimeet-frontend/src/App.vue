@@ -1,15 +1,19 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+   <!-- <DoctorInterface/> -->
+    <UserInterface/> 
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import DoctorInterface from './components/DoctorInterface.vue'
+import UserInterface from './components/UserInterface.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // DoctorInterface,
+    UserInterface
   }
 }
 </script>
