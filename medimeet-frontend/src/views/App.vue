@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-   <!-- <DoctorInterface/> -->
-    <UserInterface/> 
+    <h1>MediMeet</h1>
+    <router-view name="nav"></router-view>
+    <!-- <DoctorInterface/> -->
+    <PatientInterface/> 
+    <!-- <UserSummary/> -->
   </div>
 </template>
 
 <script>
 // import DoctorInterface from './components/DoctorInterface.vue'
-import UserInterface from './components/UserInterface.vue'
+import PatientInterface from './PatientInterface.vue'
+// import UserSummary from '../components/UserSummary.vue';
 
 export default {
   name: 'App',
   components: {
     // DoctorInterface,
-    UserInterface
+    PatientInterface,
+    // UserSummary
   }
 }
 </script>
