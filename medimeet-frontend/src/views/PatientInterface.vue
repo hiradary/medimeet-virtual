@@ -1,16 +1,14 @@
 <template>
   <NavBar />
-
   <div class="container">
     <div class="row">
       <div class="col-md-12">
 
         <h1 class="text-center">Patient List</h1>
-        <a class="btn btn-primary btn-block" href="/add">Add Patient</a>
+        <a class="btn btn-primary btn-block" href="/registration">Add Patient</a>
         <br>
 
         <table class="table table-striped">
-
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -19,9 +17,9 @@
               <th scope="col">Age</th>
               <th scope="col">Gender</th>
               <th scope="col">Phone</th>
+              <th scope="col">Status</th>
+              <th scope="col">Prescription</th>
               <th scope="col">Bio</th>
-              <th scope="col">Update</th>
-              <th scope="col">Delete</th>
             </tr>
           </thead>
 
@@ -52,7 +50,7 @@ export default {
   name: 'PatientInterface',
   components: {
       NavBar,
-
+      
   }, 
   data(){
     return {

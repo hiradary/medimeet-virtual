@@ -1,7 +1,8 @@
 import axios from 'axios'
-
-export default class UserService {
-    getUserList () {
-        return axios.get('/api/v1/users')
+class UserService {
+    getUserList() {
+        return axios.get(process.env.BASE_URL + '/api/users')
     }
 }
+
+export default new UserService()

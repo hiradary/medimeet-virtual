@@ -28,6 +28,11 @@ const router = createRouter({
             path: '/about',
             name: 'about',
             component: () => import('../views/DoctorInterface.vue')
+        },
+        {
+            path: '/patient',
+            name: 'patient',
+            component: () => import('../components/UserInfo.vue')
         }
     ]
 })

@@ -8,10 +8,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1">
-              <li class="nav-item mx-3"> <a href="/">Home</a> </li>
-              <li class="nav-item mx-3"> <a href="/about">About</a> </li>
-              <li class="nav-item mx-3"> <a href="/login">Login</a> </li>
-              <li class="nav-item mx-3"> <a href="/registration">Registration</a> </li>
+              <li class="nav-item mx-3"> <a class="nav-link" href="/">Home</a> </li>
+              <li class="nav-item mx-3"> <a class="nav-link" href="/about">About Doctor</a> </li>
+              <li class="nav-item mx-3"> <a class="nav-link" href="/login">Login</a> </li>
+              <li class="nav-item mx-3"> <a class="nav-link" href="/registration">Registration</a> </li>
+              <li class="nav-item mx-3"> <a class="nav-link" href="/edit/{{ user.id }}">User Summary</a> </li>
             </ul>
           </div>
         </div>

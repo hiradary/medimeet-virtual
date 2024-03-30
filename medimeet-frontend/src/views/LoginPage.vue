@@ -28,21 +28,7 @@
                 <label for="age" class="form-label">Age</label>
                 <input type="number" name="age" class="form-control" id="age" v-model="patients.age" required>
               </div>
-
-              <!-- gender
-              <label for="gender" class="form-label">Gender</label>
-              <div class="form-check">
-                <input type="radio" name="gender" class="form-control" id="male" value="male" v-model="patients.gender" required>
-                <label for="male" class="form-check-label">Male</label>
-              </div>
-              <div class="form-check">
-                <input type="radio" name="gender" class="form-control" id="female" value="female" v-model="patients.gender" required>
-                <label for="female" class="form-check-label">Female</label>
-              </div>
-              <div class="form-check">
-                <input type="radio" name="gender" class="form-control" id="other" value="other" v-model="patients.gender" required>
-                <label for="other" class="form-check-label">None</label>
-              </div> -->
+              
               <label for="gender" class="form-label">Gender</label>
               <select id="gender" class="form-control" v-model="patients.gender" required>
                 <option value="">Select gender</option>

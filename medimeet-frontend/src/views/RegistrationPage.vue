@@ -13,14 +13,15 @@
                 <div class="mb-3 form-group col-md-12">
                   <label for="name" class="form-label">Name</label>
                   
-                  <!-- faild -->
-                  <!--  <input type="text" class="form-control" id="name" placeholder="Name" v-model="patient.name" required> -->
+                  <!-- faild v-model="patient.name" -->
+                   <input type="text" class="form-control" id="name" placeholder="Name"  required>
                 </div>
               </div>
 
               <div class="row">
                 <div class="mb-3 form-group col-md-12">
                   <label for="email" class="form-label">Email</label>
+                  
                   <!-- <input type="email" class="form-control" id="email" placeholder="Email" v-model="patient.email" required> -->
                 </div>
               </div>
