@@ -7,11 +7,11 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item"> <a href="/">Home</a> </li>
-              <li class="nav-item"> <a href="/about">About</a> </li>
-              <li class="nav-item"> <a href="/login">Login</a> </li>
-              <li class="nav-item"> <a href="/registration">Registration</a> </li>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-grow-1">
+              <li class="nav-item mx-3"> <a href="/">Home</a> </li>
+              <li class="nav-item mx-3"> <a href="/about">About</a> </li>
+              <li class="nav-item mx-3"> <a href="/login">Login</a> </li>
+              <li class="nav-item mx-3"> <a href="/registration">Registration</a> </li>
             </ul>
           </div>
         </div>

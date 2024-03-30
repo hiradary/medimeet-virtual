@@ -1,27 +1,33 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import LoginPage from '../views/LoginPage.vue'
-import NavBar from '../components/NavBar.vue'
+import PatientInterface from '@/views/PatientInterface.vue'
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL), 
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: LoginPage
+            name: '/home',
+            component: PatientInterface
         },
-        // {
-        //     path: '/about',
-        //     name: 'about',
-        //     // route level code-splitting
-        //     // this generates a separate chunk (About.[hash].js) for this route
-        //     // which is lazy-loaded when the route is visited.
-        //     component: () => import('../components/NavBar.vue')
-        // },
+        {
+            path: '/login',
+            name: 'login',
+            component: () => import('../views/LoginPage.vue')
+        },
+        {
+            path: '/registration',
+            name: 'registration',
+            component: () => import('../views/RegistrationPage.vue')
+        },
+        {
+            path: '/edit/:id',
+            name: 'edit',
+            component: () => import('../views/UpdateUser.vue')
+        },
         {
             path: '/about',
             name: 'about',
-            component: NavBar   
+            component: () => import('../views/DoctorInterface.vue')
         }
     ]
 })
