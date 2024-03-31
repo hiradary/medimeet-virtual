@@ -1,6 +1,8 @@
 package com.example.medimeet.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class Appointment {
@@ -16,23 +18,23 @@ public class Appointment {
     @JoinColumn(name = "doctorId", referencedColumnName = "userId")
     private User doctor;
 
-    private String appointmentDate;
-    private String appointmentTime;
+    private LocalDate appointmentDate;
+    private LocalTime appointmentTime;
     private String status;
     
-	public String getAppointmentDate() {
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
 	
-	public void setAppointmentDate(String appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 
-	public String getAppointmentTime() {
+	public LocalTime getAppointmentTime() {
 		return appointmentTime;
 	}
 
-	public void setAppointmentTime(String appointmentTime) {
+	public void setAppointmentTime(LocalTime appointmentTime) {
 		this.appointmentTime = appointmentTime;
 	}
 
@@ -43,4 +45,20 @@ public class Appointment {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
+    }
+    
+    public User getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(User doctor) {
+        this.doctor = doctor;
+    }
 }

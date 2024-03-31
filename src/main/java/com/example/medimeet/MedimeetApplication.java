@@ -11,6 +11,7 @@ import com.example.medimeet.repositories.DoctorDescRepository;
 import com.example.medimeet.repositories.FeedbackRepository;
 import com.example.medimeet.repositories.PrescriptionRepository;
 import com.example.medimeet.repositories.UserRepository;
+import com.example.medimeet.utils.SimpleHashingTool;
 
 @SpringBootApplication
 public class MedimeetApplication {
@@ -33,7 +34,7 @@ public class MedimeetApplication {
     		AppointmentRepository appointmentRepository, UserRepository userRepository,FeedbackRepository feedbackRepository, 
     		PrescriptionRepository prescriptionRepository) {
 
-		User testUser = new User("Hirad Arshadi", "hirad@gmail.com", "123456", "Doctor", "Vancouver", "+1 778 667 2361");
+		User testUser = new User("Hirad Arshadi", "hirad@gmail.com", SimpleHashingTool.hashPassword("123456"), "Doctor", "Vancouver", "+1 778 667 2361");
 		
 		userRepository.save(testUser);
 	}
