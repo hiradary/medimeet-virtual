@@ -5,12 +5,12 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL), 
     routes: [
         {
-            path: '/',
+            path: '/home',
             name: '/home',
             component: PatientInterface
         },
         {
-            path: '/login',
+            path: '/',
             name: 'login',
             component: () => import('../views/LoginPage.vue')
         },
@@ -25,8 +25,8 @@ const router = createRouter({
             component: () => import('../views/UpdateUser.vue')
         },
         {
-            path: '/about',
-            name: 'about',
+            path: '/DoctorInterface',
+            name: 'DoctorInterface',
             component: () => import('../views/DoctorInterface.vue')
         },
         {

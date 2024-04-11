@@ -142,14 +142,25 @@ export default {
   methods: {
     registerUser(event) {
       event.preventDefault(); // Prevent default form submission behavior
-      
+
       // Call the registration service method to register the user
       RegistrationService.registerUser(this.user)
         .then(response => {
           // If registration is successful, handle the response
           console.log(response.data); // Log the response data (optional)
-          // Optionally, you can redirect the user to a different route after successful registration
-          this.$router.push({ name: "home" });
+          this.user.userId = response.data.userId; // Assign userId to user object
+
+          // Display a success message
+          alert('Registration successful! Please login.');
+
+          // Redirect the user to the login page
+          this.$router.push({ name: 'login' });
+
+          // If the user type is "doctor", register doctor description
+          if (this.user.userType === 'doctor') {
+            // Call the registration service method to register the doctor description
+            this.registerDoctorDescription();
+          }
         })
         .catch(error => {
           // If registration encounters an error, handle the error
@@ -157,23 +168,21 @@ export default {
           // Display an error message to the user (optional)
           alert('User registration failed. Please try again.');
         });
-
-      // If the user type is "doctor", register doctor description
-      if (this.user.userType === 'doctor') {
-        // Call the registration service method to register the doctor description
-        RegistrationService.registerDoctorDescription(this.doctorDesc)
-          .then(response => {
-            // If registration is successful, handle the response
-            console.log(response.data); // Log the response data (optional)
-            // You can perform additional actions if needed
-          })
-          .catch(error => {
-            // If registration encounters an error, handle the error
-            console.error('Error during doctor description registration:', error);
-            // Display an error message to the user (optional)
-            alert('Doctor description registration failed. Please try again.');
-          });
-      }
+    },
+    registerDoctorDescription() {
+      // Call the registration service method to register the doctor description
+      RegistrationService.registerDoctorDescription(this.doctorDesc, this.user.userId)
+        .then(doctorDescResponse => {
+          // If registration is successful, handle the response
+          console.log(doctorDescResponse.data); // Log the response data (optional)
+          // You can perform additional actions if needed
+        })
+        .catch(error => {
+          // If registration encounters an error, handle the error
+          console.error('Error during doctor description registration:', error);
+          // Display an error message to the user (optional)
+          alert('Doctor description registration failed. Please try again.');
+        });
     }
   }
 };
@@ -185,7 +194,6 @@ export default {
   background-size: cover;
   height: 100vh;
 }
-
 .card {
   width: 550px;
 }
@@ -203,15 +211,15 @@ export default {
 }
 
 .availability-option {
-  flex-basis: calc(33.33% - 20px); /* Adjust width based on the number of options you have */
+  flex-basis: calc(33.33% - 20px);
   margin-right: 20px;
-  margin-bottom: 20px; /* Adjust margin-bottom for spacing */
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
 
 .availability-option label {
-  width: 150px; /* Adjust label width as needed */
+  width: 150px;
   margin-right: 10px;
 }
 

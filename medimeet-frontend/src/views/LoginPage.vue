@@ -14,13 +14,13 @@
         <button type="submit" class="btn">Login</button>
       </form>
       <div class="error-message" v-if="errorMessage">{{ errorMessage }}</div>
-     <br/>
-       <!-- Registration link -->
-       <router-link to="/registration" class="register-link">Don't have an account? Register here</router-link>
-   
+      <br/>
+      <!-- Registration link -->
+      <router-link to="/registration" class="register-link">Don't have an account? Register here</router-link>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -33,10 +33,16 @@ export default {
   methods: {
     login() {
       // Here you can implement your login logic
-      if (this.username === 'admin' && this.password === 'password') {
-        // Successful login
+      if (this.username === 'user' && this.password === 'password') {
+        // Simulating a successful login for user
         this.errorMessage = '';
-        alert('Login successful!');
+        localStorage.setItem('user', JSON.stringify({ userId: 1, userType: 'user' }));
+        this.$router.push({ name: 'home' }); // Redirect to PatientInterface
+      } else if (this.username === 'doctor' && this.password === 'password') {
+        // Simulating a successful login for doctor
+        this.errorMessage = '';
+        localStorage.setItem('user', JSON.stringify({ userId: 2, userType: 'doctor' }));
+        this.$router.push({ name: 'DoctorInterface' }); // Redirect to DoctorInterface
       } else {
         // Invalid credentials
         this.errorMessage = 'Invalid username or password';
@@ -46,7 +52,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .login-container {
   display: flex;
   justify-content: center;
