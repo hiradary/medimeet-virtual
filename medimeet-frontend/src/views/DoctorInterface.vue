@@ -11,6 +11,8 @@
             <th style="padding: 8px; border: 1px solid #dddddd; text-align: left;">Date</th>
             <th style="padding: 8px; border: 1px solid #dddddd; text-align: left;">Time</th>
             <th style="padding: 8px; border: 1px solid #dddddd; text-align: left;">Status</th>
+            <th style="padding: 8px; border: 1px solid #dddddd; text-align: left;">Actions</th> <!-- Add Actions column -->
+
           </tr>
         </thead>
         <tbody>
@@ -19,6 +21,9 @@
             <td style="padding: 8px; border: 1px solid #dddddd;">{{ appointment.appointmentDate }}</td>
             <td style="padding: 8px; border: 1px solid #dddddd;">{{ appointment.appointmentTime }}</td>
             <td style="padding: 8px; border: 1px solid #dddddd;">{{ appointment.status }}</td>
+            <td style="padding: 8px; border: 1px solid #dddddd;">
+              <button @click="goToAppointmentDetails(appointment.appointmentId)">Details</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -54,6 +59,7 @@
 <script>
 import appointmentService from '../services/AppiointmentService';
 
+
 export default {
   data() {
     return {
@@ -69,6 +75,10 @@ export default {
     this.fetchUsers();
   },
   methods: {
+    goToAppointmentDetails(appointmentId) {
+    console.log('Id:', appointmentId);
+    this.$router.push({ name: 'AppointmentDetails', params: { id: appointmentId } });
+  },
     async fetchAppointments() {
       try {
         const response = await appointmentService.getAll();
