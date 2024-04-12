@@ -45,8 +45,6 @@ public class AppointmentController {
             appointment.setAppointmentDate(appointmentDetails.getAppointmentDate());
             appointment.setAppointmentTime(appointmentDetails.getAppointmentTime());
             appointment.setStatus(appointmentDetails.getStatus());
-            appointment.setPatient(appointmentDetails.getPatient());
-            appointment.setDoctor(appointmentDetails.getDoctor());
             Appointment updatedAppointment = appointmentRepository.save(appointment);
             return ResponseEntity.ok(updatedAppointment);
         }).orElseGet(() -> ResponseEntity.notFound().build());
