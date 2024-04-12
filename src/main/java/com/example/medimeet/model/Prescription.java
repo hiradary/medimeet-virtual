@@ -1,11 +1,14 @@
 package com.example.medimeet.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Prescription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty
     private Long prescriptionId;
 
     @ManyToOne
@@ -24,6 +27,22 @@ public class Prescription {
 		return medication;
 	}
 	
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public User getPatient() {
+		return patient;
+	}
+
+	public void setPatient(User patient) {
+		this.patient = patient;
+	}
+
 	public void setMedication(String medication) {
 		this.medication = medication;
 	}

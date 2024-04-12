@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.medimeet.model.DoctorDesc;
+import com.example.medimeet.model.User;
 import com.example.medimeet.repositories.DoctorDescRepository;
+import com.example.medimeet.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,8 @@ public class DoctorDescController {
 
     @Autowired
     private DoctorDescRepository doctorDescRepository;
+    @Autowired
+    private UserRepository userRepository; // Inject UserRepository
 
     @GetMapping
     public ResponseEntity<List<DoctorDesc>> getAllDoctorDescs() {
@@ -25,11 +29,13 @@ public class DoctorDescController {
     }
 
     @PostMapping
-    public ResponseEntity<DoctorDesc> createDoctorDesc(@RequestBody DoctorDesc doctorDesc) {
+    public ResponseEntity<DoctorDesc> createDoctorDesc(@RequestBody DoctorDesc doctorDesc, @RequestParam Long userId) {
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new RuntimeException("User not found"));
+        doctorDesc.setUser(user);
         DoctorDesc savedDoctorDesc = doctorDescRepository.save(doctorDesc);
         return new ResponseEntity<>(savedDoctorDesc, HttpStatus.CREATED);
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDesc> getDoctorDescById(@PathVariable Long id) {
         Optional<DoctorDesc> doctorDesc = doctorDescRepository.findById(id);

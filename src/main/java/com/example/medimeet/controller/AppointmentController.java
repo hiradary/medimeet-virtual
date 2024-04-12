@@ -21,6 +21,9 @@ public class AppointmentController {
     @GetMapping
     public ResponseEntity<List<Appointment>> getAllAppointments() {
         List<Appointment> appointments = appointmentRepository.findAll();
+        for (Appointment appointment : appointments) {
+            System.out.println("All Appointments: " + appointment); // Log the appointments list
+        }
         return ResponseEntity.ok(appointments);
     }
 

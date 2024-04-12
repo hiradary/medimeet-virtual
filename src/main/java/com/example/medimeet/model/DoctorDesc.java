@@ -8,7 +8,7 @@ public class DoctorDesc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long doctorDescId;
     
-    @OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "userId")
     private User user;
     
@@ -17,10 +17,22 @@ public class DoctorDesc {
     private String bio;
     private String photo;
     
+    public DoctorDesc() {}
+
+    public DoctorDesc(User user, String specialization, String availability, String bio, String photo) {
+        this.user = user;
+        this.specialization = specialization;
+        this.availability = availability;
+        this.bio = bio;
+        this.photo = photo;
+    }
 	public String getSpecialization() {
 		return specialization;
 	}
 	
+	public User getUser() {
+		return user;
+	}
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
@@ -47,5 +59,10 @@ public class DoctorDesc {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+	public void setUser(User user) {
+			this.user = user;
+		
 	}
 }

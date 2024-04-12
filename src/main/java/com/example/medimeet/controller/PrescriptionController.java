@@ -5,7 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.medimeet.model.Appointment;
+import com.example.medimeet.model.DoctorDesc;
 import com.example.medimeet.model.Prescription;
+import com.example.medimeet.model.User;
+import com.example.medimeet.repositories.AppointmentRepository;
 import com.example.medimeet.repositories.PrescriptionRepository;
 
 import java.util.List;
@@ -17,6 +21,8 @@ public class PrescriptionController {
 
     @Autowired
     private PrescriptionRepository prescriptionRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepo;
 
     @GetMapping
     public ResponseEntity<List<Prescription>> getAllPrescriptions() {
@@ -24,16 +30,22 @@ public class PrescriptionController {
         return ResponseEntity.ok(prescriptions);
     }
 
-    @PostMapping
-    public ResponseEntity<Prescription> createPrescription(@RequestBody Prescription prescription) {
-        Prescription savedPrescription = prescriptionRepository.save(prescription);
-        return new ResponseEntity<>(savedPrescription, HttpStatus.CREATED);
-    }
-
+	 @PostMapping
+	 public ResponseEntity<Prescription> createPrescription(@RequestBody Prescription prescription) {
+		 System.out.println(prescription);
+		 Prescription savedPrescription = prescriptionRepository.save(prescription); 
+		 return new ResponseEntity<>(savedPrescription, HttpStatus.CREATED); 
+		 }
+	 
     @GetMapping("/{id}")
     public ResponseEntity<Prescription> getPrescriptionById(@PathVariable Long id) {
         Optional<Prescription> prescription = prescriptionRepository.findById(id);
         return prescription.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping("/appointment/{appointmentId}")
+    public ResponseEntity<List<Prescription>> getPrescriptionsByAppointmentId(@PathVariable Long appointmentId) {
+        List<Prescription> prescriptions = prescriptionRepository.findByAppointmentAppointmentId(appointmentId);
+        return ResponseEntity.ok(prescriptions);
     }
 
     @PutMapping("/{id}")
